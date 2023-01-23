@@ -163,7 +163,7 @@ def temperature():
         data.source = "humidity-temperature-sensor"
     data.value = (temperature * multiplier) + addend
 
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 
 
 ''' Humidity
@@ -190,7 +190,7 @@ def humidity():
     data.unit = unit
 
     data.value = sense.get_humidity() * multiplier
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 
 
 ''' Pressure
@@ -219,7 +219,7 @@ def pressure():
 
     data.value = sense.get_pressure() * multiplier
 
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 #endregion
 
 #region IMU Sensors Endpoints
