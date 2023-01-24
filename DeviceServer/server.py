@@ -236,7 +236,7 @@ def orientation():
     data.value = datadict
 
 
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 
 
 ''' Compass
@@ -254,7 +254,7 @@ def compass():
     data.source = 'imu-comapss'
     data.unit = 'degrees'
     data.value = sense.get_compass()
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 
 
 ''' Compass Raw
@@ -280,7 +280,7 @@ def compass_raw():
         "z" : compass_raw_data['z']
     }
     data.value = datadict
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 
 
 ''' Gyroscope
@@ -306,7 +306,7 @@ def gyroscope():
     }
     data.value = datadict
 
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 
 
 ''' Gyroscope Raw
@@ -333,7 +333,7 @@ def gyroscope_raw():
     }
     data.value = datadict
 
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 
 
 ''' Accelerometer
@@ -359,7 +359,7 @@ def accelerometer():
     }
     data.value = datadict
 
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 
 
 ''' Accelerometer Raw
@@ -386,7 +386,7 @@ def accelerometer_raw():
     }
     data.value = datadict
 
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 #endregion
 
 #region Joystick Endpoint
@@ -451,7 +451,7 @@ def joystick():
     }
     data.value = datadict
 
-    return json.dumps(data, default=vars)
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 #endregion
 
 #region LED Matrix Endpoints
@@ -510,7 +510,7 @@ def matrix():
         }
         data.value = datadict
 
-        return json.dumps(data, default=vars)
+        return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
 
     if request.method ==  'PUT':
         r_str = request.args.get('r')
