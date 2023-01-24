@@ -65,12 +65,14 @@ Return:
   unit={degrees,radians}
 
 {
-    "pitch": 134.99292494377005,
-    "roll": 272.70787173355234,
     "source": "imu-orientation",
     "time": 1674514058,
     "unit": "degrees",
-    "yaw": 270.0047167041533
+    "value" : {
+      "roll": 272.70787173355234,
+      "pitch": 134.99292494377005,
+      "yaw": 270.0047167041533
+    }
 }
 ```
 
@@ -81,7 +83,7 @@ Return:
 
 Return:
 {
-    "north": 270.0047167041533,
+    "value": 270.0047167041533,
     "source": "imu-comapss",
     "time": 1674514088,
     "unit": "degrees"
@@ -95,12 +97,14 @@ Return:
 
 Return:
 {
-    "magx": 9.646000057876,
-    "magy": -2.128000012768,
-    "magz": 40.950000245700004,
     "source": "imu-comapss-raw",
     "time": 1674514139,
-    "unit": "microtesla"
+    "unit": "microtesla",
+    "value" : {
+      "x": 9.646000057876,
+      "y": -2.128000012768,
+      "z": 40.950000245700004
+    }
 }
 ```
 
@@ -111,12 +115,14 @@ Return:
 
 Return:
 {
-    "pitch": 134.99292494377005,
-    "roll": 272.70787173355234,
     "source": "imu-gyroscope",
     "time": 1674514211,
     "unit": "degrees",
-    "yaw": 270.0047167041533
+    "value" : {
+      "roll": 272.70787173355234,
+      "pitch": 134.99292494377005,
+      "yaw": 270.0047167041533
+    }
 }
 ```
 
@@ -127,12 +133,14 @@ Return:
 
 Return:
 {
-    "gyrox": 0.035000000087500004,
-    "gyroy": -0.035000000087500004,
-    "gyroz": -0.07000000017500001,
     "source": "imu-gyroscope-raw",
     "time": 1674514234,
     "unit": "radians-per-second"
+    "value" : {
+      "x": 0.035000000087500004,
+      "y": 0.035000000087500004,
+      "z": 0.07000000017500001
+    }
 }
 ```
 
@@ -143,12 +151,14 @@ Return:
 
 Return:
 {
-    "pitch": 134.99292494377005,
-    "roll": 272.70787173355234,
     "source": "imu-accelerometer",
     "time": 1674514280,
     "unit": "degrees",
-    "yaw": 270.0047167041533
+    "value" : {
+      "roll": 272.70787173355234,
+      "pitch": 134.99292494377005,
+      "yaw": 270.0047167041533
+    }
 }
 ```
 
@@ -159,12 +169,14 @@ Return:
 
 Return:
 {
-    "accx": -0.7095199918405201,
-    "accy": 0.7078049918602426,
-    "accz": -0.0350349995970975,
     "source": "imu-accelerometer-raw",
     "time": 1674514320,
-    "unit": "G"
+    "unit": "G",
+    "value" : {
+      "x": 0.035000000087500004,
+      "y": 0.035000000087500004,
+      "z": 0.07000000017500001
+    }
 }
 ```
 
@@ -176,25 +188,22 @@ Return:
 
 Return: {mode}
 {
-    "clicks": 14,
-    "posx": -2,
-    "posy": -3,
     "source": "joystick",
     "time": 1674514429,
-    "unit": "position"
+    "unit": "position",
+    "value" : {
+      "clicks": 14,
+      "x": -2,
+      "y": -3
+    }
 }
 Returns an ammount of clicks since last request
 
-Return: {reset}
+Return:
 {
-    "clicks": 0,
-    "posx": 0,
-    "posy": 0,
-    "source": "joystick",
-    "time": 1674514439,
-    "unit": "position"
+    "success": true
 }
-Returns an zero ammount of clicks, resets the counter
+Resets the counter
 ```
 
 ## LED Matrix Endpoint
@@ -206,16 +215,18 @@ Returns an zero ammount of clicks, resets the counter
 
 Return:
 {
-    "rgb": [
-        248,
-        252,
-        248
-    ],
     "source": "led-matrix",
     "time": 1674514561,
     "unit": "rgb",
-    "x": 1,
-    "y": 1
+    "value" : {
+      "x": 1,
+      "y": 1,
+      "rgb": [
+          248,
+          252,
+          248
+      ]
+    }
 }
 
 [PUT]

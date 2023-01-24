@@ -15,80 +15,62 @@ class JsonWrapper:
     time = 0
     source = ""
     unit = ""
+    value = ""
 
 #region Enviromental Sensors Templates
 class TemperatureData(JsonWrapper):
     def __init__(self):
         super(TemperatureData, self).__init__()
-    value = 0.0
 
 class HumidityData(JsonWrapper):
     def __init__(self):
         super(HumidityData, self).__init__()
-    value = 0.0
 
 class PressureData(JsonWrapper):
     def __init__(self):
         super(PressureData, self).__init__()
-    value = 0.0
 #endregion
 
 #region IMU Sensors Templates
 class OrientationData(JsonWrapper):
     def __init__(self):
         super(OrientationData, self).__init__()
-    roll = 0.0
-    pitch = 0.0
-    yaw = 0.0
+
 
 class CompassData(JsonWrapper):
     def __init__(self):
         super(CompassData, self).__init__()
-    north = 0.0
 
 class CompassRawData(JsonWrapper):
     def __init__(self):
         super(CompassRawData, self).__init__()
-    magx = 0.0
-    magy = 0.0
-    magz = 0.0
+
 
 class GyroscopeData(JsonWrapper):
     def __init__(self):
         super(GyroscopeData, self).__init__()
-    roll = 0.0
-    pitch = 0.0
-    yaw = 0.0
+
 
 class GyroscopeRawData(JsonWrapper):
     def __init__(self):
         super(GyroscopeRawData, self).__init__()
-    gyrox = 0.0
-    gyroy = 0.0
-    gyroz = 0.0
+
 
 class AccelerometerData(JsonWrapper):
     def __init__(self):
         super(AccelerometerData, self).__init__()
-    roll = 0.0
-    pitch = 0.0
-    yaw = 0.0
 
 class AccelerometerRawData(JsonWrapper):
     def __init__(self):
         super(AccelerometerRawData, self).__init__()
-    accx = 0.0
-    accy = 0.0
-    accz = 0.0
+
 #endregion
 
 #region Joystick Template
 class JoystickData(JsonWrapper):
     def __init__(self):
         super(JoystickData, self).__init__()
-    posx = 0
-    posy = 0
-    clicks = 0
+
 
 #endregion
 
@@ -96,9 +78,7 @@ class JoystickData(JsonWrapper):
 class LedMatrixData(JsonWrapper):
     def __init__(self):
         super(LedMatrixData, self).__init__()
-    x = 0
-    y = 0
-    rgb = [0,0,0]
+
 #endregion
 
 @app.route('/')
@@ -248,9 +228,13 @@ def orientation():
         orientation_data = sense.get_orientation_radians()
     data.unit = unit
 
-    data.roll = orientation_data['roll']
-    data.pitch = orientation_data['pitch']
-    data.yaw = orientation_data['yaw']
+    datadict = {
+        "roll" : orientation_data['roll'],
+        "pitch" : orientation_data['pitch'],
+        "yaw" : orientation_data['yaw']
+    }
+    data.value = datadict
+
 
     return json.dumps(data, default=vars)
 
@@ -269,7 +253,7 @@ def compass():
     data = CompassData()
     data.source = 'imu-comapss'
     data.unit = 'degrees'
-    data.north = sense.get_compass()
+    data.value = sense.get_compass()
     return json.dumps(data, default=vars)
 
 
@@ -289,9 +273,13 @@ def compass_raw():
     data.source = 'imu-comapss-raw'
     data.unit = 'microtesla'
     compass_raw_data = sense.get_compass_raw()
-    data.magx = compass_raw_data['x']
-    data.magy = compass_raw_data['y']
-    data.magz = compass_raw_data['z']
+
+    datadict = {
+        "x" : compass_raw_data['x'],
+        "y" : compass_raw_data['y'],
+        "z" : compass_raw_data['z']
+    }
+    data.value = datadict
     return json.dumps(data, default=vars)
 
 
@@ -310,9 +298,14 @@ def gyroscope():
     data.source = 'imu-gyroscope'
     data.unit = 'degrees'
     gyroscope_data = sense.get_gyroscope()
-    data.roll = gyroscope_data['roll']
-    data.pitch = gyroscope_data['pitch']
-    data.yaw = gyroscope_data['yaw']
+
+    datadict = {
+        "roll" : gyroscope_data['roll'],
+        "pitch" : gyroscope_data['pitch'],
+        "yaw" : gyroscope_data['yaw']
+    }
+    data.value = datadict
+
     return json.dumps(data, default=vars)
 
 
@@ -332,9 +325,14 @@ def gyroscope_raw():
     data.source = 'imu-gyroscope-raw'
     data.unit = 'radians-per-second'
     gyroscope_raw_data = sense.get_gyroscope_raw()
-    data.gyrox = gyroscope_raw_data['x']
-    data.gyroy = gyroscope_raw_data['y']
-    data.gyroz = gyroscope_raw_data['z']
+
+    datadict = {
+        "x" : gyroscope_raw_data['x'],
+        "y" : gyroscope_raw_data['y'],
+        "z" : gyroscope_raw_data['z']
+    }
+    data.value = datadict
+
     return json.dumps(data, default=vars)
 
 
@@ -352,10 +350,15 @@ def accelerometer():
     data = AccelerometerData()
     data.source = 'imu-accelerometer'
     data.unit = 'degrees'
-    gyroscope_data = sense.get_accelerometer()
-    data.roll = gyroscope_data['roll']
-    data.pitch = gyroscope_data['pitch']
-    data.yaw = gyroscope_data['yaw']
+    accel_data = sense.get_accelerometer()
+
+    datadict = {
+        "roll" : accel_data['roll'],
+        "pitch" : accel_data['pitch'],
+        "yaw" : accel_data['yaw']
+    }
+    data.value = datadict
+
     return json.dumps(data, default=vars)
 
 
@@ -375,9 +378,14 @@ def accelerometer_raw():
     data.source = 'imu-accelerometer-raw'
     data.unit = 'G'
     accelerometer_raw_data = sense.get_accelerometer_raw()
-    data.accx = accelerometer_raw_data['x']
-    data.accy = accelerometer_raw_data['y']
-    data.accz = accelerometer_raw_data['z']
+
+    datadict = {
+        "x" : accelerometer_raw_data['x'],
+        "y" : accelerometer_raw_data['y'],
+        "z" : accelerometer_raw_data['z'],
+    }
+    data.value = datadict
+
     return json.dumps(data, default=vars)
 #endregion
 
@@ -430,14 +438,18 @@ def joystick():
         joystick_x = 0
         joystick_y = 0
         clicks = 0
+        return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
 
     data = JoystickData()
     data.source = 'joystick'
     data.unit = 'position'
 
-    data.posx = joystick_x
-    data.posy = joystick_y
-    data.clicks = clicks
+    datadict = {
+        "x" : joystick_x,
+        "y" : joystick_y,
+        "clicks" : clicks
+    }
+    data.value = datadict
 
     return json.dumps(data, default=vars)
 #endregion
@@ -490,9 +502,14 @@ def matrix():
         data = LedMatrixData()
         data.source = 'led-matrix'
         data.unit = 'rgb'
-        data.x = pos[0]
-        data.y = pos[1]
-        data.rgb = sense.get_pixel(*pos)
+
+        datadict = {
+            "x" : pos[0],
+            "y" : pos[1],
+            "rgb" : sense.get_pixel(*pos)
+        }
+        data.value = datadict
+
         return json.dumps(data, default=vars)
 
     if request.method ==  'PUT':
