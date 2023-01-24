@@ -251,7 +251,7 @@ Returns: JSON compass response upon success, 501 on failure
 def compass():
     sense.set_imu_config(False, True, False)
     data = CompassData()
-    data.source = 'imu-comapss'
+    data.source = 'imu-compass'
     data.unit = 'degrees'
     data.value = sense.get_compass()
     return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
