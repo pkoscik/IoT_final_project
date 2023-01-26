@@ -247,6 +247,7 @@ GET parameters: NONE
 
 Returns: JSON compass response upon success, 501 on failure
 '''
+@app.route('/comapss', methods=['GET'])
 @app.route('/compass', methods=['GET'])
 def compass():
     sense.set_imu_config(False, True, False)
@@ -266,6 +267,7 @@ GET parameters: NONE
 
 Returns: JSON compass response upon success, 501 on failure
 '''
+@app.route('/comapss-raw', methods=['GET'])
 @app.route('/compass-raw', methods=['GET'])
 def compass_raw():
     sense.set_imu_config(False, True, False)
