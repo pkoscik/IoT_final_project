@@ -1,0 +1,348 @@
+﻿<Window x:Class="IoT_Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IoT_Windows"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl x:Name="tabControl" TabStripPlacement="Bottom">
+            
+            <TabItem x:Name="temperatureTab" Header="Temperature">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.66*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <WpfPlot Grid.Column="0" x:Name="TemperaturePlot" />
+                    <StackPanel Grid.Column="1" Margin="25" Orientation="Vertical">
+                        <TextBlock Margin="0,5,0,5">Sensor:</TextBlock>
+                        <ComboBox x:Name="temperatureSource">
+                            <ComboBoxItem Content="Temperature"/>
+                            <ComboBoxItem Content="Humidity"/>
+                            <ComboBoxItem Content="Pressure"/>
+                        </ComboBox>
+
+                        <TextBlock Margin="0,5,0,5">Unit:</TextBlock>
+                        <ComboBox x:Name="temperatureUnit">
+                            <ComboBoxItem Content="Celcius"/>
+                            <ComboBoxItem Content="Kelvin"/>
+                            <ComboBoxItem Content="Farenhait"/>
+                        </ComboBox>
+
+                        <TextBlock Margin="0,5,0,5">Get data:</TextBlock>
+                        <Button x:Name="GetDataButton" Click="OnGetDataButton">Pull one sample</Button>
+
+                        <TextBlock Margin="0,5,0,5">Autoamtic data acquisition data:</TextBlock>
+                        <Button x:Name="TemperatureDataAcquireButton" Click="OnDataAcquireButtonClick"> START </Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="pressureTab" Header="Pressure">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.66*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <WpfPlot Grid.Column="0" x:Name="PressurePlot" />
+                    <StackPanel Grid.Column="1" Margin="25" Orientation="Vertical">
+
+                        <TextBlock Margin="0,5,0,5">Unit:</TextBlock>
+                        <ComboBox x:Name="pressureUnit">
+                            <ComboBoxItem Content="mmHg"/>
+                            <ComboBoxItem Content="MPa"/>
+                        </ComboBox>
+
+                        <TextBlock Margin="0,5,0,5">Get data:</TextBlock>
+                        <Button x:Name="GetPressureDataButton" Click="OnGetDataButton">Pull one sample</Button>
+
+                        <TextBlock Margin="0,5,0,5">Autoamtic data acquisition data:</TextBlock>
+                        <Button x:Name="PressureDataAcquireButton" Click="OnDataAcquireButtonClick">START</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="humidityTab" Header="Humidity">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.66*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <WpfPlot Grid.Column="0" x:Name="HumidityPlot" />
+                    <StackPanel Grid.Column="1" Margin="25" Orientation="Vertical">
+
+                        <TextBlock Margin="0,5,0,5">Unit:</TextBlock>
+                        <ComboBox x:Name="humidityUnit">
+                            <ComboBoxItem Content="percent"/>
+                            <ComboBoxItem Content="digital"/>
+                        </ComboBox>
+
+                        <TextBlock Margin="0,5,0,5">Get data:</TextBlock>
+                        <Button x:Name="GetHumidityDataButton" Click="OnGetDataButton">Pull one sample</Button>
+
+                        <TextBlock Margin="0,5,0,5">Autoamtic data acquisition data:</TextBlock>
+                        <Button x:Name="HumidityDataAcquireButton" Click="OnDataAcquireButtonClick">START</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="orientationTab" Header="Orientation">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.66*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <WpfPlot Grid.Column="0" x:Name="OrientationPlot" />
+                    <StackPanel Grid.Column="1" Margin="25" Orientation="Vertical">
+
+                        <TextBlock Margin="0,5,0,5">Source:</TextBlock>
+                        <ComboBox x:Name="orientationSource">
+                            <ComboBoxItem Content="Orientation"/>
+                            <ComboBoxItem Content="Gyroscope"/>
+                            <ComboBoxItem Content="Accelerometer"/>
+                        </ComboBox>
+                        
+                        <TextBlock Margin="0,5,0,5">Get data:</TextBlock>
+                        <Button x:Name="GetOrientationDataButton" Click="OnGetDataButton">Pull one sample</Button>
+
+                        <TextBlock Margin="0,5,0,5">Autoamtic data acquisition data:</TextBlock>
+                        <Button x:Name="OrieentaionDataAcquireButton" Click="OnDataAcquireButtonClick">START</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="compassTab" Header="Compass">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.66*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <WpfPlot Grid.Column="0" x:Name="CompassPlot" />
+                    <StackPanel Grid.Column="1" Margin="25" Orientation="Vertical">
+
+                        <TextBlock Margin="0,5,0,5">Get data:</TextBlock>
+                        <Button x:Name="GetCompassDataButton" Click="OnGetDataButton">Pull one sample</Button>
+
+                        <TextBlock Margin="0,5,0,5">Autoamtic data acquisition data:</TextBlock>
+                        <Button x:Name="CompassDataAcquireButton" Click="OnDataAcquireButtonClick">START</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="compassRawTab" Header="Magnetic Field">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.66*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <WpfPlot Grid.Column="0" x:Name="CompassRawPlot" />
+                    <StackPanel Grid.Column="1" Margin="25" Orientation="Vertical">
+
+                        <TextBlock Margin="0,5,0,5">Get data:</TextBlock>
+                        <Button x:Name="GetCompassRawDataButton" Click="OnGetDataButton">Pull one sample</Button>
+
+                        <TextBlock Margin="0,5,0,5">Autoamtic data acquisition data:</TextBlock>
+                        <Button x:Name="CompassRawDataAcquireButton" Click="OnDataAcquireButtonClick">START</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="angAccTab" Header="Angular Acceleraion">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.66*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <WpfPlot Grid.Column="0" x:Name="angAccPlot" />
+                    <StackPanel Grid.Column="1" Margin="25" Orientation="Vertical">
+
+                        <TextBlock Margin="0,5,0,5">Get data:</TextBlock>
+                        <Button x:Name="GetAngAccRawDataButton" Click="OnGetDataButton">Pull one sample</Button>
+
+                        <TextBlock Margin="0,5,0,5">Autoamtic data acquisition data:</TextBlock>
+                        <Button x:Name="AngAccRawDataAcquireButton" Click="OnDataAcquireButtonClick">START</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="accTab" Header="Acceleraion">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.66*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <WpfPlot Grid.Column="0" x:Name="AccPlot" />
+                    <StackPanel Grid.Column="1" Margin="25" Orientation="Vertical">
+
+                        <TextBlock Margin="0,5,0,5">Get data:</TextBlock>
+                        <Button x:Name="GetAccRawDataButton" Click="OnGetDataButton">Pull one sample</Button>
+
+                        <TextBlock Margin="0,5,0,5">Autoamtic data acquisition data:</TextBlock>
+                        <Button x:Name="AccDataAcquireButton" Click="OnDataAcquireButtonClick">START</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="joyTab" Header="Joystick">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.66*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <WpfPlot Grid.Column="0" x:Name="JoyPlot" />
+                    <StackPanel Grid.Column="1" Margin="25" Orientation="Vertical">
+
+                        <TextBlock Margin="0,5,0,5">Get data:</TextBlock>
+                        <Button x:Name="GetJoyRawDataButton" Click="OnGetDataButton">Pull one sample</Button>
+
+                        <TextBlock Margin="0,5,0,5">Autoamtic data acquisition data:</TextBlock>
+                        <Button x:Name="JoyDataAcquireButton" Click="OnDataAcquireButtonClick">START</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="rgbTab" Header="RGB Matrix">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.66*"/>
+                        <ColumnDefinition Width="0.33*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid x:Name='ledMatrix' Width="200" Height="200" Margin="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.125*"/>
+                            <ColumnDefinition Width="0.125*"/>
+                            <ColumnDefinition Width="0.125*"/>
+                            <ColumnDefinition Width="0.125*"/>
+                            <ColumnDefinition Width="0.125*"/>
+                            <ColumnDefinition Width="0.125*"/>
+                            <ColumnDefinition Width="0.125*"/>
+                            <ColumnDefinition Width="0.125*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.125*"/>
+                            <RowDefinition Height="0.125*"/>
+                            <RowDefinition Height="0.125*"/>
+                            <RowDefinition Height="0.125*"/>
+                            <RowDefinition Height="0.125*"/>
+                            <RowDefinition Height="0.125*"/>
+                            <RowDefinition Height="0.125*"/>
+                            <RowDefinition Height="0.125*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <RadioButton Grid.Column="0" Grid.Row="0"/>
+                        <RadioButton Grid.Column="0" Grid.Row="1"/>
+                        <RadioButton Grid.Column="0" Grid.Row="2"/>
+                        <RadioButton Grid.Column="0" Grid.Row="3"/>
+                        <RadioButton Grid.Column="0" Grid.Row="4"/>
+                        <RadioButton Grid.Column="0" Grid.Row="5"/>
+                        <RadioButton Grid.Column="0" Grid.Row="6"/>
+                        <RadioButton Grid.Column="0" Grid.Row="7"/>
+
+                        <RadioButton Grid.Column="1" Grid.Row="0"/>
+                        <RadioButton Grid.Column="1" Grid.Row="1"/>
+                        <RadioButton Grid.Column="1" Grid.Row="2"/>
+                        <RadioButton Grid.Column="1" Grid.Row="3"/>
+                        <RadioButton Grid.Column="1" Grid.Row="4"/>
+                        <RadioButton Grid.Column="1" Grid.Row="5"/>
+                        <RadioButton Grid.Column="1" Grid.Row="6"/>
+                        <RadioButton Grid.Column="1" Grid.Row="7"/>
+
+                        <RadioButton Grid.Column="2" Grid.Row="0"/>
+                        <RadioButton Grid.Column="2" Grid.Row="1"/>
+                        <RadioButton Grid.Column="2" Grid.Row="2"/>
+                        <RadioButton Grid.Column="2" Grid.Row="3"/>
+                        <RadioButton Grid.Column="2" Grid.Row="4"/>
+                        <RadioButton Grid.Column="2" Grid.Row="5"/>
+                        <RadioButton Grid.Column="2" Grid.Row="6"/>
+                        <RadioButton Grid.Column="2" Grid.Row="7"/>
+
+                        <RadioButton Grid.Column="3" Grid.Row="0"/>
+                        <RadioButton Grid.Column="3" Grid.Row="1"/>
+                        <RadioButton Grid.Column="3" Grid.Row="2"/>
+                        <RadioButton Grid.Column="3" Grid.Row="3"/>
+                        <RadioButton Grid.Column="3" Grid.Row="4"/>
+                        <RadioButton Grid.Column="3" Grid.Row="5"/>
+                        <RadioButton Grid.Column="3" Grid.Row="6"/>
+                        <RadioButton Grid.Column="3" Grid.Row="7"/>
+
+                        <RadioButton Grid.Column="4" Grid.Row="0"/>
+                        <RadioButton Grid.Column="4" Grid.Row="1"/>
+                        <RadioButton Grid.Column="4" Grid.Row="2"/>
+                        <RadioButton Grid.Column="4" Grid.Row="3"/>
+                        <RadioButton Grid.Column="4" Grid.Row="4"/>
+                        <RadioButton Grid.Column="4" Grid.Row="5"/>
+                        <RadioButton Grid.Column="4" Grid.Row="6"/>
+                        <RadioButton Grid.Column="4" Grid.Row="7"/>
+
+                        <RadioButton Grid.Column="5" Grid.Row="0"/>
+                        <RadioButton Grid.Column="5" Grid.Row="1"/>
+                        <RadioButton Grid.Column="5" Grid.Row="2"/>
+                        <RadioButton Grid.Column="5" Grid.Row="3"/>
+                        <RadioButton Grid.Column="5" Grid.Row="4"/>
+                        <RadioButton Grid.Column="5" Grid.Row="5"/>
+                        <RadioButton Grid.Column="5" Grid.Row="6"/>
+                        <RadioButton Grid.Column="5" Grid.Row="7"/>
+
+                        <RadioButton Grid.Column="6" Grid.Row="0"/>
+                        <RadioButton Grid.Column="6" Grid.Row="1"/>
+                        <RadioButton Grid.Column="6" Grid.Row="2"/>
+                        <RadioButton Grid.Column="6" Grid.Row="3"/>
+                        <RadioButton Grid.Column="6" Grid.Row="4"/>
+                        <RadioButton Grid.Column="6" Grid.Row="5"/>
+                        <RadioButton Grid.Column="6" Grid.Row="6"/>
+                        <RadioButton Grid.Column="6" Grid.Row="7"/>
+
+                        <RadioButton Grid.Column="7" Grid.Row="0"/>
+                        <RadioButton Grid.Column="7" Grid.Row="1"/>
+                        <RadioButton Grid.Column="7" Grid.Row="2"/>
+                        <RadioButton Grid.Column="7" Grid.Row="3"/>
+                        <RadioButton Grid.Column="7" Grid.Row="4"/>
+                        <RadioButton Grid.Column="7" Grid.Row="5"/>
+                        <RadioButton Grid.Column="7" Grid.Row="6"/>
+                        <RadioButton Grid.Column="7" Grid.Row="7"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Margin="25" Orientation="Vertical">
+
+                        <TextBlock Margin="0,5,0,5">Get data:</TextBlock>
+                        <Button x:Name="GetRgbRawDataButton" Click="OnGetDataButton">Pull one sample</Button>
+
+                        <TextBlock Margin="0,50,0,5">Set data:</TextBlock>
+
+                        <TextBlock Margin="0,5,0,5">Red</TextBlock>
+                        <Slider x:Name="redSlider" Maximum="255" Minimum="0"/>
+
+                        <TextBlock Margin="0,5,0,5">Green</TextBlock>
+                        <Slider x:Name="greenSlider" Maximum="255" Minimum="0"/>
+                        
+                        <TextBlock Margin="0,5,0,5">Blue</TextBlock>
+                        <Slider x:Name="blueSlider" Maximum="255" Minimum="0"/>
+
+                        <Button Margin="0,5,0,5" Click="SetRgbColorClick">Set data</Button>
+                        
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="settings" Header="Settings">
+                <Grid Margin="10">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Margin="0,5,0,5">IP:</TextBlock>
+                        <TextBox HorizontalAlignment="Left" x:Name="ipBox" Width="255" Height="25"/>
+
+                        <TextBlock Margin="0,5,0,5">Port:</TextBlock>
+                        <TextBox HorizontalAlignment="Left" x:Name="portBox" Width="255" Height="25"/>
+
+                        <TextBlock Margin="0,5,0,5">Sample Time:</TextBlock>
+                        <TextBox HorizontalAlignment="Left" x:Name="sampleTimeBox" Width="255" Height="25"/>
+
+                        <Button x:Name="applyButton" HorizontalAlignment="Left" Width="100" Margin="10,50,0,0" Click="applyButton_Click">Apply</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</Window>
