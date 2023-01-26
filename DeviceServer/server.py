@@ -143,7 +143,7 @@ def temperature():
         data.source = "humidity-temperature-sensor"
     data.value = (temperature * multiplier) + addend
 
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 
 
 ''' Humidity
@@ -170,7 +170,7 @@ def humidity():
     data.unit = unit
 
     data.value = sense.get_humidity() * multiplier
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 
 
 ''' Pressure
@@ -199,7 +199,7 @@ def pressure():
 
     data.value = sense.get_pressure() * multiplier
 
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 #endregion
 
 #region IMU Sensors Endpoints
@@ -236,7 +236,7 @@ def orientation():
     data.value = datadict
 
 
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 
 
 ''' Compass
@@ -254,7 +254,7 @@ def compass():
     data.source = 'imu-compass'
     data.unit = 'degrees'
     data.value = sense.get_compass()
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 
 
 ''' Compass Raw
@@ -280,7 +280,7 @@ def compass_raw():
         "z" : compass_raw_data['z']
     }
     data.value = datadict
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 
 
 ''' Gyroscope
@@ -306,7 +306,7 @@ def gyroscope():
     }
     data.value = datadict
 
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 
 
 ''' Gyroscope Raw
@@ -333,7 +333,7 @@ def gyroscope_raw():
     }
     data.value = datadict
 
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 
 
 ''' Accelerometer
@@ -359,7 +359,7 @@ def accelerometer():
     }
     data.value = datadict
 
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 
 
 ''' Accelerometer Raw
@@ -386,7 +386,7 @@ def accelerometer_raw():
     }
     data.value = datadict
 
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 #endregion
 
 #region Joystick Endpoint
@@ -438,7 +438,7 @@ def joystick():
         joystick_x = 0
         joystick_y = 0
         clicks = 0
-        return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+        return json.dumps({'success':True}), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 
     data = JoystickData()
     data.source = 'joystick'
@@ -451,7 +451,7 @@ def joystick():
     }
     data.value = datadict
 
-    return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+    return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 #endregion
 
 #region LED Matrix Endpoints
@@ -510,7 +510,7 @@ def matrix():
         }
         data.value = datadict
 
-        return json.dumps(data, default=vars), 200, {'ContentType':'application/json'}
+        return json.dumps(data, default=vars), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 
     if request.method ==  'PUT':
         r_str = request.args.get('r')
@@ -518,5 +518,5 @@ def matrix():
         b_str = request.args.get('b')
         color = try_parse_rgb(r_str, g_str, b_str)
         sense.set_pixel(*pos, color)
-        return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+        return json.dumps({'success':True}), 200, {'ContentType':'application/json', 'Access-Control-Allow-Origin':'*'}
 #endregion
